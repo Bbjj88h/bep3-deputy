@@ -4,7 +4,7 @@
 # Stage 1 downloads dependencies and creates a list of required go packages.
 # Stage 2 copies in the dependency sources and builds the dependencies based on the list. After this source code is copied in and the deputy is built.
 
-FROM golang:1.13-alpine AS depCalculator
+FROM golang:1.22.7-alpine AS depCalculator
 
 RUN apk add --no-cache git
 
@@ -22,7 +22,7 @@ RUN go list -deps -f '{{ $ip := .Module}}{{if $ip}}{{if not $ip.Main}}{{.ImportP
 
 
 
-FROM golang:1.13-alpine
+FROM golang:1.22.7-alpine
 
 # Set up apk dependencies
 ENV PACKAGES make git libc-dev bash gcc linux-headers eudev-dev curl ca-certificates
